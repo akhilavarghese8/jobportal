@@ -32,7 +32,8 @@ urlpatterns = [
     path('job/all/list/',views.JobListView.as_view(),name='job-list'),
     path('application/<int:id>/accept/',views.ApplicationAcceptView.as_view(),name='application-accept'),
     path('application/<int:id>/reject/',views.ApplicationRejectView.as_view(),name='application-reject'),
-    path('error/',views.ErrorPageView.as_view(),name='error')
+    path('error/',views.ErrorPageView.as_view(),name='error'),
+
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

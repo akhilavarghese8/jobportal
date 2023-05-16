@@ -11,7 +11,7 @@ router.register("jobs",views.JobView,basename="jobs")
 router.register("applications",views.ApplicationView,basename="applications")
 
 urlpatterns=[
-    path("token/",ObtainAuthToken.as_view())
+    path("token/",ObtainAuthToken.as_view()),
     # path("token/",TokenObtainPairView.as_view()),
     # path("token/refresh/",TokenRefreshView.as_view())
 ]+router.urls

@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def employersignin_required(fn):
@@ -22,6 +24,7 @@ employerdecs=[employersignin_required,never_cache]
 def candidatesignin_required(fn):
     def wrapper(request,*args,**kwargs):
         if request.user.is_authenticated and request.user.role=='candidate':
+            
             return fn(request,*args,**kwargs)
         else:
             return redirect('error')       
@@ -51,6 +54,7 @@ class SignInView(FormView):
             passw=form.cleaned_data.get("password")
             usr=authenticate(request,username=usrn,password=passw)
             if usr:
+                
                 login(request,usr)
                 if request.user.role == 'employer':
                     if CompanyProfile.objects.filter(user_id=request.user.id):
@@ -63,8 +67,9 @@ class SignInView(FormView):
                     else:
                         return redirect("candidateprofile-create")
             else:
+                messages.error(request, 'Invalid username and passwod, Please try again.')
                 return render(request,"login.html",{"form":form})
-            
+       
 
 def SignOutView(request,*args,**kwargs):
     logout(request)
@@ -87,7 +92,9 @@ class CompanyProfileCreateView(CreateView):
     model=CompanyProfile
     success_url=reverse_lazy('employer-home')
 
+
     def form_valid(self, form):
+        messages.success(self.request,'profile created')
         form.instance.user=self.request.user
         return super().form_valid(form)
 
@@ -177,14 +184,28 @@ class CandidateDetailsView(ListView):
 class ApplicationAcceptView(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get('id')
+        app=Application.objects.get(id=id)
+        email=app.candidate.user.email
         Application.objects.filter(id=id).update(status='accept')
+        subject='reply for your jobapplication'
+        message='Hi,your job application was accepted'
+        email_from=settings.EMAIL_HOST_USER
+        recipient_list=[email]
+        send_mail(subject,message,email_from,recipient_list)
         return redirect('myjob-list')
     
 @method_decorator(employerdecs,name='dispatch')       
 class ApplicationRejectView(View):
     def get(self,request,*args,**kwargs):
         id=kwargs.get('id')
+        app=Application.objects.get(id=id)
+        email=app.candidate.user.email
         Application.objects.filter(id=id).update(is_active=False,status='reject')
+        subject='reply for your jobapplication'
+        message='Hi,your job application was rejected'
+        email_from=settings.EMAIL_HOST_USER
+        recipient_list=[email]
+        send_mail(subject,message,email_from,recipient_list)
         return redirect('myjob-list')
 
 # CANDIDATE
@@ -201,6 +222,7 @@ class CandidateProfileCreateView(CreateView):
     success_url=reverse_lazy('home')
 
     def form_valid(self, form):
+        print(self.request.FILES)
         form.instance.user=self.request.user
         return super().form_valid(form)
 
@@ -288,3 +310,4 @@ class AcceptedJobListView(ListView):
     def get_queryset(self):
         candidate=CandidateProfile.objects.get(user_id=self.request.user.id)
         return Application.objects.filter(candidate=candidate,status='accept')
+    

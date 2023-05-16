@@ -7,6 +7,8 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework import authentication,permissions,serializers,views
 from api.models import User,CandidateProfile,CompanyProfile,Job,Application
 from rest_framework.decorators import action
+from django.core.mail import send_mail
+
 
 # from django.contrib.auth.models import AbstractUser,User
 # Create your views here.
@@ -169,3 +171,5 @@ class ApplicationView(ModelViewSet):
         app.is_active=False
         app.save()
         return Response('rejected')
+
+

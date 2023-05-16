@@ -54,7 +54,6 @@ class CompanyProfile(models.Model):
 class Job(models.Model):
     company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     start_date = models.DateField(default=datetime.date.today)
-    currentdate=datetime.date.today()
     end_date = models.DateField(validators=[MinValueValidator(datetime.date.today)])
     title = models.CharField(max_length=200)
     salary = models.CharField(max_length=200)
