@@ -25,14 +25,14 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarCollapse" >
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="{%url 'employer-home'%}" class="nav-item nav-link active text-white me-4"><i class="fa-solid fa-house fa-lg" ></i></a>
+            <a href="{%url 'employer-home'%}" class="nav-item nav-link active text-primary me-4"><i class="fa-solid fa-house fa-lg" ></i></a>
             {%if request.user.employerprofile%}
-            <a href="{%url 'company-profile'%}" class="nav-item nav-link text-white me-4"><i class="fa-solid fa-user fa-lg" ></i></a>
+            <a href="{%url 'company-profile'%}" class="nav-item nav-link text-primary me-4"><i class="fa-solid fa-user fa-lg" ></i></a>
             {%else%}
-            <a href="{%url 'companyprofile-create'%}" class="nav-item nav-link text-white me-4"><i class="fa-solid fa-user fa-lg" ></i></a>
+            <a href="{%url 'companyprofile-create'%}" class="nav-item nav-link text-primary me-4"><i class="fa-solid fa-user fa-lg" ></i></a>
             {%endif%}
             <div class="nav-item dropdown job me-4">
-                <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown"><i class="fa-solid fa-briefcase fa-lg"></i></a>
+                <a href="#" class="nav-link dropdown-toggle text-primary" data-bs-toggle="dropdown"><i class="fa-solid fa-briefcase fa-lg"></i></a>
                 <div class="dropdown-menu rounded-0 m-0 dropdown-menu-end">
                     <a href="{%url 'job-add'%}" class="dropdown-item">Add New Job</a>
                     <a href="{%url 'myjob-list'%}" class="dropdown-item">My Jobs</a>

@@ -18,16 +18,13 @@
     <div class="card-body p-4 p-md-5 border mt-5 rounded-2 shadow">
 
       <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> create companyprofile</h3>
-      {%if messages%}
-      {%for m in messages%}
-      <div class="alert alert-info"> {{m}}</div>
-
-      {%endfor%}
-      {%endif%}
+      
 
       <form class="px-md-2" method="post" enctype="multipart/form-data" action="{%url 'companyprofile-create'%}">
 
         {%csrf_token%}
+        
+      
 
 
         <div class="form-outline mb-4">

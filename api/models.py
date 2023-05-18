@@ -25,7 +25,7 @@ class CandidateProfile(models.Model):
             ('Female','Female'),
             ('Other','Other')
         )
-    gender = models.CharField(max_length=10,choices=genders)
+    gender = models.CharField(max_length=10,choices=genders,default="Male")
     qualification = models.CharField(max_length=200)
     resume = models.FileField(upload_to="resumes",null=True,blank=True)
     location = models.CharField(max_length=200)

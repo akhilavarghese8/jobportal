@@ -45,6 +45,12 @@ font-family:Verdana, Geneva, Tahoma, sans-serif;
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+{%if messages%}
+{%for m in messages%}
+<div class="alert alert-info"> {{m}}</div>
+
+{%endfor%}
+{%endif%}
 
 <div class="container-xxl py-5">
   <div class="container">
