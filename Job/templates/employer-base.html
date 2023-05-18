@@ -16,6 +16,7 @@
 
 </head>
 <body>
+    
    <!-- Navbar Start -->
    <nav class=" navbar navbar-expand-lg bg-primary navbar-light shadow sticky-top p-4 ">
     <h1 class="m-0 text-white ms-4">JobPortal</h1>
@@ -39,8 +40,10 @@
                 </div>
             </div>
             <div class="dropdown me-3" >
+                
                 <img src="{{request.user.employerprofile.logo.url}}" class="rounded-circle"  data-bs-toggle="dropdown" aria-expanded="false" height="40px" width="40px">
                 </img>
+                
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{%url 'signout' %}">Logout</a></li>
                 </ul>

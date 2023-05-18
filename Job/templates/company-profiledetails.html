@@ -115,9 +115,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="candidates-profile-details text-center " >
+                      {%if request.user.employerprofile.logo%}
                         <img src="{{request.user.employerprofile.logo.url}}" class="  rounded-circle img" height="100px" width="100px">
                         <h4 class=" candidates-profile-name mb-2">{{request.user.employerprofile.company_name }}</h4>
-                        
+                      {%endif%}
 
                         <ul class="candidates-profile-social-icons list-inline mb-0">
                             <li class="list-inline-item"><a href="#" class=""><i class="mdi mdi-facebook"></i></a></li>

@@ -147,7 +147,9 @@
                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7 b">
                         <div class="row align-items-center ">
                             <div class="col-lg-6 mb-4 mb-lg-0 pb-5 pe-5 ps-5 " style="height: 400px;">
+                                {%if request.user.employeeprofile.image%}
                                 <img src="{{request.user.employeeprofile.image.url}}" alt="..."  height="100%" width="100%" class="rounded-circle">
+                                {%endif%}
                             </div>
                             <div class="col-lg-6 px-xl-10 p-3 ">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded text-center " style="min-width: 200px;">
@@ -206,20 +208,9 @@
                 </div>
                   
                   <!-- Modal -->
-                  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Resume</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body" style="height: 600px;">
-                            <a href="{{request.user.employeeprofile.resume.url}}" download>resume</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div>
+                    <a href="{{request.user.employeeprofile.resume.url}}" download>resume</a>
+                </div>
             </div>
         </div>
     </div>

@@ -94,8 +94,9 @@ class CompanyProfileCreateView(CreateView):
 
 
     def form_valid(self, form):
-        messages.success(self.request,'profile created')
+       
         form.instance.user=self.request.user
+        messages.success(self.request,'company profile is created')
         return super().form_valid(form)
 
 @method_decorator(employerdecs,name='dispatch')
@@ -224,6 +225,7 @@ class CandidateProfileCreateView(CreateView):
     def form_valid(self, form):
         print(self.request.FILES)
         form.instance.user=self.request.user
+        messages.success(self.request,'candidate profile is created')
         return super().form_valid(form)
 
 @method_decorator(candidatedecs,name='dispatch')    
